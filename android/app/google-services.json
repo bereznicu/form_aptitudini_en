@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "682913363666",
+    "firebase_url": "https://form-battery-en.firebaseio.com",
+    "project_id": "form-battery-en",
+    "storage_bucket": "form-battery-en.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682913363666:android:d7fb5f53cfd44624725f0b",
+        "android_client_info": {
+          "package_name": "com.form_aptitudini_en"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682913363666-v9hsdutat8g0jjeb71056ls6ponpqi8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.form_aptitudini_en",
+            "certificate_hash": "fcadab4336ccce8fa7fdbdde8650f5d9b28059f9"
+          }
+        },
+        {
+          "client_id": "682913363666-tva56p7m785qh5adq3ui7nh0qtde8t2v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrxnLvmcOCxW1JXOD_aOiJW45sMeSFIdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682913363666-tva56p7m785qh5adq3ui7nh0qtde8t2v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
