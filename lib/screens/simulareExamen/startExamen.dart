@@ -133,8 +133,8 @@ class _StartExamenPortrait extends State<StartExamenPortrait> {
       var timerInfo = Provider.of<TimerInfo>(context, listen: false);
       timesUp = timerInfo.timesUp();
       if(timesUp == true){
-        if(timer.isActive)timer.cancel();
         await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
+        if(timer.isActive)timer.cancel();
         Navigator.of(context).pushReplacementNamed('/examResults');
       }
     });
@@ -252,9 +252,9 @@ class _StartExamenPortrait extends State<StartExamenPortrait> {
                     currentQuestion == '1' ? Container() : FloatingActionButton(
                         heroTag: "precedenta",
                         backgroundColor: Colors.black,
-                        onPressed: () {
+                        onPressed: () async {
                           timer.cancel();
-                          exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
+                          await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
                           Navigator.of(context).pushReplacementNamed('/examen', arguments: (int.parse(currentQuestion) - 1).toString());
                         },
                         child: Icon(
@@ -266,10 +266,10 @@ class _StartExamenPortrait extends State<StartExamenPortrait> {
                       FloatingActionButton(
                           heroTag: "urmatoarea",
                           backgroundColor: Colors.black,
-                          onPressed: () {
+                          onPressed: () async {
+                          await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
                           timer.cancel();
                           print(exercisesFields.varCorecta);
-                          exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
                           Navigator.of(context).pushReplacementNamed('/examen', arguments: (int.parse(currentQuestion) + 1).toString());
                           },
                           child: Icon(
@@ -288,7 +288,8 @@ class _StartExamenPortrait extends State<StartExamenPortrait> {
 //                        side: BorderSide(color: Colors.green),
                               ),
                               color: Colors.lightGreen,
-                              onPressed: () {
+                              onPressed: () async {
+                                await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
                                 setState(() {
                                   _incheieExamenDialog(context, exercisesFields, selected, currentQuestion, timer);
                                 });
@@ -481,9 +482,9 @@ class _StartExamenLandscape extends State<StartExamenLandscape> {
                       child: FloatingActionButton(
                         heroTag: "precedenta",
                         backgroundColor: Colors.black,
-                        onPressed: () {
+                        onPressed: () async {
+                          await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
                           timer.cancel();
-                          exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
                           Navigator.of(context).pushReplacementNamed('/examen', arguments: (int.parse(currentQuestion) - 1).toString());
                         },
                         child: Icon(
@@ -498,9 +499,9 @@ class _StartExamenLandscape extends State<StartExamenLandscape> {
                         child: FloatingActionButton(
                           heroTag: "urmatoarea",
                           backgroundColor: Colors.black,
-                          onPressed: () {
-                          timer.cancel();
-                            exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
+                          onPressed: () async {
+                            await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
+                            timer.cancel();
                             Navigator.of(context).pushReplacementNamed('/examen', arguments: (int.parse(currentQuestion) + 1).toString());
                           },
                           child: Icon(
@@ -520,8 +521,8 @@ class _StartExamenLandscape extends State<StartExamenLandscape> {
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                             color: Colors.lightGreen,
-                            onPressed: () {
-                             exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
+                            onPressed: () async {
+                             await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
                              if(timer.isActive)timer.cancel();
                               setState(() {
                                 _incheieExamenDialog(context, exercisesFields, selected, currentQuestion, timer);
@@ -575,8 +576,8 @@ Future<void> _incheieExamenDialog(BuildContext context, ExercisesFields exercise
           FlatButton(
             child: Text('Yes', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
             onPressed: () async {
-              if(timerInfo.timer.isActive) timerInfo.cancelTimer();
               await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
+              if(timerInfo.timer.isActive) timerInfo.cancelTimer();
               Navigator.of(context).pushReplacementNamed('/examResults');
             },
           ),
