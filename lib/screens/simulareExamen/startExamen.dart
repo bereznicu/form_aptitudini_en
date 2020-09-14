@@ -129,12 +129,12 @@ class _StartExamenPortrait extends State<StartExamenPortrait> {
         break;
       }
     }
-    timer = Timer.periodic(Duration(seconds: 1), (t) {
+    timer = Timer.periodic(Duration(seconds: 1), (t) async {
       var timerInfo = Provider.of<TimerInfo>(context, listen: false);
       timesUp = timerInfo.timesUp();
       if(timesUp == true){
         if(timer.isActive)timer.cancel();
-        exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
+        await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
         Navigator.of(context).pushReplacementNamed('/examResults');
       }
     });
@@ -357,12 +357,12 @@ class _StartExamenLandscape extends State<StartExamenLandscape> {
         break;
       }
     }
-    timer = Timer.periodic(Duration(seconds: 1), (t) {
+    timer = Timer.periodic(Duration(seconds: 1), (t) async {
       var timerInfo = Provider.of<TimerInfo>(context, listen: false);
       timesUp = timerInfo.timesUp();
       if(timesUp == true){
         if(timer.isActive)timer.cancel();
-        exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
+        await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
         Navigator.of(context).pushReplacementNamed('/examResults');
       }
     });
@@ -521,11 +521,11 @@ class _StartExamenLandscape extends State<StartExamenLandscape> {
                             ),
                             color: Colors.lightGreen,
                             onPressed: () {
-                            if(timer.isActive)timer.cancel();
+                             exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
+                             if(timer.isActive)timer.cancel();
                               setState(() {
                                 _incheieExamenDialog(context, exercisesFields, selected, currentQuestion, timer);
                               });
-                              exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
                             },
                             child: Text('Finish exam',
                               style: TextStyle(
@@ -574,10 +574,9 @@ Future<void> _incheieExamenDialog(BuildContext context, ExercisesFields exercise
           ),
           FlatButton(
             child: Text('Yes', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-            onPressed: () {
+            onPressed: () async {
               if(timerInfo.timer.isActive) timerInfo.cancelTimer();
-//              if(timer.isActive)timer.cancel();
-              exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
+              await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
               Navigator.of(context).pushReplacementNamed('/examResults');
             },
           ),
