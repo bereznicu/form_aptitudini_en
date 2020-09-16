@@ -89,7 +89,7 @@ class NoConnection extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Container(
                   margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.07),
-                    height: MediaQuery.of(context).size.height * 0.7,
+                    height: MediaQuery.of(context).size.height * 0.8,
                     width: MediaQuery.of(context).size.width * 0.4,
                     decoration: BoxDecoration(
                       image: DecorationImage(
