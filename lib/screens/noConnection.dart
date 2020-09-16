@@ -66,6 +66,7 @@ class NoConnection extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: RaisedButton(
+                    color: Colors.black,
                     child: Text('Reload', style: TextStyle(color: Colors.white),),
                     onPressed: () {
                       Navigator.of(context).pushReplacementNamed(route, arguments: collectionOrCurrentQuestion);
@@ -101,6 +102,7 @@ class NoConnection extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: RaisedButton(
+                  color: Colors.black,
                   child: Text('Reload', style: TextStyle(color: Colors.white),),
                   onPressed: (){
                     Navigator.of(context).pushReplacementNamed(route, arguments: collectionOrCurrentQuestion);
