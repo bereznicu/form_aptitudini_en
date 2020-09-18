@@ -70,7 +70,10 @@ class CategoriiPortrait extends StatelessWidget {
                     ),
                   ),
                 ),//CLICKABLE IMAGE
-              ])
+              ]),
+            Container(
+              height: 50.0,
+            )
           ],
         ),
       ),
@@ -146,6 +149,9 @@ class CategoriiLandscape extends StatelessWidget {
                         ),
                       ),
                     ]),
+                    Container(
+                      height: 50.0,
+                    )
                   ])
           ],
         ),
