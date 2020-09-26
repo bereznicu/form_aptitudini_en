@@ -1,17 +1,33 @@
 import 'dart:ui';
 
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:form_aptitudini_en/classes/ad_manager.dart';
 import 'package:form_aptitudini_en/classes/countersExam.dart';
 import 'package:form_aptitudini_en/classes/countersStorage.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
 
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   CountersStorage counters = new CountersStorage();
   CountersExam countersExam = new CountersExam();
+  BannerAd bannerAd;
+
+  @override
+  void initState() {
+    super.initState();
+    bannerAd = AdManager().bannerAd();
+    bannerAd.load();
+  }
 
   @override
   Widget build(BuildContext context) {
+    bannerAd.show(anchorType: AnchorType.bottom);
     counters.initiateCounters();
     var orientation = MediaQuery.of(context).orientation;
     if(orientation == Orientation.portrait)
@@ -21,7 +37,14 @@ class Home extends StatelessWidget {
   }
 }
 
-class PortraitHome extends StatelessWidget {
+
+
+class PortraitHome extends StatefulWidget {
+  @override
+  _PortraitHomeState createState() => _PortraitHomeState();
+}
+
+class _PortraitHomeState extends State<PortraitHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,8 +161,15 @@ class PortraitHome extends StatelessWidget {
   }
 }
 
-class LandscapeHome extends StatelessWidget {
 
+
+class LandscapeHome extends StatefulWidget {
+
+  @override
+  _LandscapeHomeState createState() => _LandscapeHomeState();
+}
+
+class _LandscapeHomeState extends State<LandscapeHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

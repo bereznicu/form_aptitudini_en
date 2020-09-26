@@ -1,13 +1,29 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:form_aptitudini_en/classes/ad_manager.dart';
 
 import '../../constante.dart';
 
-class CategoriiExercitii extends StatelessWidget {
+class CategoriiExercitii extends StatefulWidget {
+
+  @override
+  _CategoriiExercitiiState createState() => _CategoriiExercitiiState();
+}
+
+class _CategoriiExercitiiState extends State<CategoriiExercitii> {
+  BannerAd bannerAd;
+
+  @override
+  void initState() {
+    super.initState();
+    bannerAd = AdManager().bannerAd();
+    bannerAd.load();
+  }
 
   @override
   Widget build(BuildContext context) {
-
+    bannerAd.show(anchorType: AnchorType.bottom);
     var orientation = MediaQuery.of(context).orientation;
 
     if(orientation == Orientation.portrait)

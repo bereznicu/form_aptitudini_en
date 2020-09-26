@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:form_aptitudini_en/classes/ad_manager.dart';
 import 'package:form_aptitudini_en/classes/routeGenerator.dart';
 import 'package:form_aptitudini_en/timerProvider.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  AdManager().initAdMob();
   runApp(ChangeNotifierProvider(create: (context) => TimerInfo(), child: MyApp(),),);
 }
 

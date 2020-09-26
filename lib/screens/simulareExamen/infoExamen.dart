@@ -1,4 +1,6 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
+import 'package:form_aptitudini_en/classes/ad_manager.dart';
 import 'package:provider/provider.dart';
 
 import '../../timerProvider.dart';
@@ -11,18 +13,20 @@ class InfoExamen extends StatefulWidget {
 
 class _InfoExamenState extends State<InfoExamen> {
 
+  BannerAd bannerAd;
   @override
   void initState() {
     super.initState();
     var timerInfo = Provider.of<TimerInfo>(context, listen: false);
     timerInfo.timer.cancel();
-
+    bannerAd = AdManager().bannerAd();
+    bannerAd.load();
   }
 
 
   @override
   Widget build(BuildContext context) {
-
+    bannerAd.show(anchorType: AnchorType.bottom);
     var timerInfo = Provider.of<TimerInfo>(context, listen: false);
     timerInfo.timer.cancel();
   var orientation = MediaQuery.of(context).orientation;
@@ -64,6 +68,13 @@ class InfoExamenStatePortrait extends StatelessWidget {
                   color: Colors.green,
                   splashColor: Colors.black,
                   onPressed: () {
+                    InterstitialAd interstitialAd = AdManager().interstitialAd();
+                    interstitialAd.load();
+                    interstitialAd.show(
+                      anchorType: AnchorType.bottom,
+                      anchorOffset: 0.0,
+                      horizontalCenterOffset: 0.0,
+                    );
                     var timerInfo = Provider.of<TimerInfo>(context, listen: false);
                     timerInfo.updateRemainingTime([30, 0]);
                     Navigator.of(context).pushReplacementNamed('/examen', arguments: 1.toString());
@@ -129,6 +140,13 @@ class InfoExamenStateLandscape extends StatelessWidget {
                   color: Colors.green,
                   splashColor: Colors.black,
                   onPressed: () {
+                    InterstitialAd interstitialAd = AdManager().interstitialAd();
+                    interstitialAd.load();
+                    interstitialAd.show(
+                      anchorType: AnchorType.bottom,
+                      anchorOffset: 0.0,
+                      horizontalCenterOffset: 0.0,
+                    );
                     var timerInfo = Provider.of<TimerInfo>(context, listen: false);
                     timerInfo.updateRemainingTime([30, 0]);
                     Navigator.of(context).pushReplacementNamed('/examen', arguments: '1');

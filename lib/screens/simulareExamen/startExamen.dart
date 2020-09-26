@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
+import 'package:form_aptitudini_en/classes/ad_manager.dart';
 import 'package:form_aptitudini_en/classes/exercisesFields.dart';
 import 'package:form_aptitudini_en/classes/selectedContainer.dart';
 import 'package:form_aptitudini_en/screens/noConnection.dart';
@@ -31,6 +33,7 @@ class _StartExamen extends State<StartExamen> {
   Future documentFuture;
   String selectedAnswer;
   String currentQuestion;
+  BannerAd bannerAd;
 
   _StartExamen({Key key, this.currentQuestion});
 
@@ -41,6 +44,8 @@ class _StartExamen extends State<StartExamen> {
     exercisesFields.currentExamQuestion = currentQuestion;
     documentFuture = _getExamFields(currentQuestion);
     selected.initSelected();
+    bannerAd = AdManager().bannerAd();
+    bannerAd.load();
   }
 
   _getExamFields(String counter) async {
@@ -51,7 +56,7 @@ class _StartExamen extends State<StartExamen> {
   Widget build(BuildContext context) {
 
     var orientation = MediaQuery.of(context).orientation;
-
+    bannerAd.show(anchorType: AnchorType.bottom);
     return FutureBuilder(
       future: documentFuture,
       builder: (context, snapshot) {
@@ -158,6 +163,13 @@ class _StartExamenPortrait extends State<StartExamenPortrait> {
             ),//NU PARASITI BUTTON
             new FlatButton(
               onPressed: () {
+                InterstitialAd interstitialAd = AdManager().interstitialAd();
+                interstitialAd.load();
+                interstitialAd.show(
+                  anchorType: AnchorType.bottom,
+                  anchorOffset: 0.0,
+                  horizontalCenterOffset: 0.0,
+                );
                 timer.cancel();
                   var timerInfo = Provider.of<TimerInfo>(context, listen: false);
                   if(timerInfo.timer.isActive)timerInfo.cancelTimer();
@@ -305,6 +317,10 @@ class _StartExamenPortrait extends State<StartExamenPortrait> {
                     ),//INCHEIE EXAMEN BUTTON
                   ],
                 ), //PRECEDENTA && URMATOAREA BUTTONS || INCHEIE EXAMEN
+                SizedBox(
+                  height: 50.0,
+                  width: 230.0,
+                )
               ],
             ),
           ),
@@ -382,10 +398,17 @@ class _StartExamenLandscape extends State<StartExamenLandscape> {
           actions: <Widget>[
             new FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: new Text('Nu', style: TextStyle(color: Colors.white),),
+              child: new Text('No', style: TextStyle(color: Colors.white),),
             ),
             new FlatButton(
               onPressed: () {
+                InterstitialAd interstitialAd = AdManager().interstitialAd();
+                interstitialAd.load();
+                interstitialAd.show(
+                  anchorType: AnchorType.bottom,
+                  anchorOffset: 0.0,
+                  horizontalCenterOffset: 0.0,
+                );
                 timer.cancel();
                 var timerInfo = Provider.of<TimerInfo>(context, listen: false);
                 if(timerInfo.timer.isActive)timerInfo.cancelTimer();
@@ -394,7 +417,7 @@ class _StartExamenLandscape extends State<StartExamenLandscape> {
                 Navigator.of(context, rootNavigator: false).pop();
                 Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
               },
-              child: new Text('Da', style: TextStyle(color: Colors.white),),
+              child: new Text('Yes', style: TextStyle(color: Colors.white),),
             ),
           ],
         ),
@@ -539,6 +562,10 @@ class _StartExamenLandscape extends State<StartExamenLandscape> {
                     )//INCHEIE EXAMEN BUTTON
                   ],
                 ), //PRECEDENTA && URMATOAREA BUTTONS || INCHEIE EXAMEN
+                SizedBox(
+                  height: 50.0,
+                  width: 230.0,
+                )
               ],
             ),
           ),
@@ -576,6 +603,13 @@ Future<void> _incheieExamenDialog(BuildContext context, ExercisesFields exercise
           FlatButton(
             child: Text('Yes', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
             onPressed: () async {
+              InterstitialAd interstitialAd = AdManager().interstitialAd();
+              interstitialAd.load();
+              interstitialAd.show(
+                anchorType: AnchorType.bottom,
+                anchorOffset: 0.0,
+                horizontalCenterOffset: 0.0,
+              );
               await exercisesFields.countersExam.storeExamQuestions(currentQuestion, exercisesFields.collection, exercisesFields.document, exercisesFields.varCorecta, selected.selectedAnswer, exercisesFields.enunt);
               if(timerInfo.timer.isActive) timerInfo.cancelTimer();
               Navigator.of(context).pushReplacementNamed('/examResults');

@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:form_aptitudini_en/classes/ad_manager.dart';
 import 'package:form_aptitudini_en/classes/countersStorage.dart';
 import 'package:form_aptitudini_en/classes/exercisesFields.dart';
 import 'package:form_aptitudini_en/classes/selectedContainer.dart';
@@ -31,13 +33,18 @@ class _StartExercitii extends State<StartExercitii> {
   final String collection;
   String counter;
   Future documentFuture;
+  BannerAd bannerAd;
+  InterstitialAd interstitialAd;
 
   _StartExercitii({this.collection});
 
   @override
   void initState() {
     super.initState();
-
+    interstitialAd = AdManager().interstitialAd();
+    interstitialAd.load();
+    bannerAd = AdManager().bannerAd();
+    bannerAd.load();
     disableTouch = false;
     selected.initSelected();
     documentFuture = _setFields(collection);
@@ -50,13 +57,21 @@ class _StartExercitii extends State<StartExercitii> {
   @override
   Widget build(BuildContext context) {
     var orientation = MediaQuery.of(context).orientation;
-
+    bannerAd.show(anchorType: AnchorType.bottom);
     return FutureBuilder(
       future: documentFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if(snapshot.hasError == true)
             return NoConnection(route: '/exercitii', collectionOrCurrentQuestion: collection,);
+          if(double.parse(exercisesFields.counterStorage.counter) % 6 ==0 )
+          {
+            interstitialAd.show(
+              anchorType: AnchorType.bottom,
+              anchorOffset: 0.0,
+              horizontalCenterOffset: 0.0,
+            );
+          }
           if (orientation == Orientation.portrait)
             return StartExercitiiPortrait(exercisesFields: exercisesFields, selected: selected, collection: collection,); //PORTRAIT
           else
@@ -234,6 +249,10 @@ class _StartExercitiiPortrait extends State<StartExercitiiPortrait> {
                       ),//URMATOAREA BUTTON
                   ],
                 ),
+                SizedBox(
+                  height: 50.0,
+                  width: 230.0,
+                )
               ],
             ),
           ),
@@ -405,7 +424,10 @@ class _StartExercitiiLandscape extends State<StartExercitiiLandscape> {
                     ),//URMATOAREA BUTTON
                   ]
                 ), //VERIFICA RASPUNS BUTTON
-
+                SizedBox(
+                  height: 50.0,
+                  width: 230.0,
+                )
               ],
             ),
           ),

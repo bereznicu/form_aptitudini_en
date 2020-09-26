@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:form_aptitudini_en/classes/ad_manager.dart';
 import 'package:form_aptitudini_en/classes/exercisesFields.dart';
 
 class ExamResults extends StatefulWidget {
@@ -12,10 +14,12 @@ class ExamResults extends StatefulWidget {
 class _ExamResultsState extends State<ExamResults> {
   ExercisesFields exercisesFields = new ExercisesFields();
   Future future;
+  BannerAd bannerAd;
 
   @override
   void initState(){
-
+    bannerAd = AdManager().bannerAd();
+    bannerAd.load();
     super.initState();
     future = _finishExam();
   }
@@ -30,7 +34,7 @@ class _ExamResultsState extends State<ExamResults> {
   Widget build(BuildContext context) {
 
     var orientation = MediaQuery.of(context).orientation;
-
+    bannerAd.show(anchorType: AnchorType.bottom);
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
@@ -87,6 +91,13 @@ class ExamResultsPortrait extends StatelessWidget{
             ),
             new FlatButton(
               onPressed: () {
+                InterstitialAd interstitialAd = AdManager().interstitialAd();
+                interstitialAd.load();
+                interstitialAd.show(
+                  anchorType: AnchorType.bottom,
+                  anchorOffset: 0.0,
+                  horizontalCenterOffset: 0.0,
+                );
                 exercisesFields.countersExam.deleteExamFile();
                 exercisesFields.countersExam.deleteQuestionsFile();
                 Navigator.of(context, rootNavigator: false).pop();
@@ -159,7 +170,11 @@ class ExamResultsPortrait extends StatelessWidget{
                         ],
                       ),//ENUNT
                     ),
-                  )
+                  ),
+                SizedBox(
+                  height: 50.0,
+                  width: 230.0,
+                )
               ],
 
             ),
@@ -201,6 +216,13 @@ class ExamResultsLandscape extends StatelessWidget{
             ),
             new FlatButton(
               onPressed: () {
+                InterstitialAd interstitialAd = AdManager().interstitialAd();
+                interstitialAd.load();
+                interstitialAd.show(
+                  anchorType: AnchorType.bottom,
+                  anchorOffset: 0.0,
+                  horizontalCenterOffset: 0.0,
+                );
                 exercisesFields.countersExam.deleteExamFile();
                 exercisesFields.countersExam.deleteQuestionsFile();
                 Navigator.of(context, rootNavigator: false).pop();
