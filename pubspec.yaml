@@ -41,6 +41,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  flutter_native_splash: ^0.1.9
+
+flutter_native_splash:
+  image: images/launch_image_bottom.9.png
+  color: "#ffffff"
+
 flutter_icons:
   android: true
   ios: true
@@ -70,6 +76,8 @@ flutter:
     - images/MathematicalWordProblems.jpg
     - images/NumberSeries.jpg
     - images/noconnection.png
+    - images/launch_image.9.png
+    - images/launch_image_bottom.9.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

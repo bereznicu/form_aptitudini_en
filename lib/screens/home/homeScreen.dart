@@ -67,6 +67,7 @@ class _PortraitHomeState extends State<PortraitHome> {
                   ),
                 ),
               ),//INFO BUTTON
+              SizedBox(height: 15.0,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -85,7 +86,7 @@ class _PortraitHomeState extends State<PortraitHome> {
               Container(
                 margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
                 child: Card(
-                  elevation: 10,
+                  elevation: 5,
                   shadowColor: Colors.grey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
@@ -127,7 +128,7 @@ class _PortraitHomeState extends State<PortraitHome> {
               Container(
                 margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
                 child: Card(
-                  elevation: 10,
+                  elevation: 5,
                   shadowColor: Colors.grey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
@@ -152,7 +153,8 @@ class _PortraitHomeState extends State<PortraitHome> {
                     ),
                   ),
                 ),
-              )  //SIMULARE EXAMEN BUTTON
+              ),  //SIMULARE EXAMEN BUTTON
+              SizedBox(height: 15.0,),
             ],
           ),
         ),
