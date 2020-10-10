@@ -52,16 +52,15 @@ class NoConnection extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Container(
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-                    width: MediaQuery.of(context).size.height * 0.4,
-                    height: MediaQuery.of(context).size.height * 0.5,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('images/noconnection.png'),
-                            fit: BoxFit.cover,
-                          ),
-                        )
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
+                      width: MediaQuery.of(context).size.width * 1,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('images/noconnection.9.png'),
+                        ),
                       ),
+                  ),
                 ),
                 Align(
                   alignment: Alignment.center,
@@ -93,8 +92,7 @@ class NoConnection extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.4,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('images/noconnection.png'),
-                        fit: BoxFit.cover,
+                        image: AssetImage('images/noconnection.9.png'),
                       ),
                     )
                 ),
